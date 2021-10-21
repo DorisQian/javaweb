@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // <!--点击超链接或图片，换一张-->
+        window.onload = function () {
+            //获取图片对象
+            let img = document.getElementById("code");
+            img.onclick = function () {
+                let date = new Date().getTime();
+                img.src = "/servlet3/responseDemo5?" + date;
+            }
+        }
+    </script>
+</head>
+<body>
+    <img id="code" src="/servlet3/responseDemo5" />
+    <a id="change" href="#">看不清，换一张</a>
+</body>
+</html>
