@@ -31,4 +31,14 @@
         <servlet-name>demo2</servlet-name>
         <url-pattern>/demo2</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>demo3</filter-name>
+        <filter-class>filter.FilterDemo2</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>demo3</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>
