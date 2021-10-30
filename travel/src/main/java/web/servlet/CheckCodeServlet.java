@@ -15,9 +15,9 @@ import java.util.Random;
 public class CheckCodeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          //浏览器不缓存
-        response.setHeader("pragma", "no-cache");
-        response.setHeader("cache-control", "no-cache");
-        response.setHeader("expires", "0");
+//        response.setHeader("pragma", "no-cache");
+//        response.setHeader("cache-control", "no-cache");
+//        response.setHeader("expires", "0");
 
         //在内存中创建一个长80，宽30的图片，默认黑色背景
         //参数一：长

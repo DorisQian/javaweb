@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>注册</title>
-        <link rel="stylesheet" type="text/css" href="css/common.css">
-        <link rel="stylesheet" href="css/register.css">
+        <link rel="stylesheet" type="text/css" href="css/common.css" >
+        <link rel="stylesheet" type="text/css" href="css/register.css" >
 		<!--导入jquery-->
 		<script src="js/jquery-3.3.1.js"></script>
 
@@ -86,7 +86,7 @@
 					if(checkUsername() && checkPassword() && checkEmail()){
 					    //校验通过,发送ajax请求，提交表单的数据   username=zhangsan&password=123
 
-						$.post("registerUserServlet",$(this).serialize(),function(data){
+						$.post("user/register",$(this).serialize(),function(data){
 							//处理服务器响应的数据  data  {flag:true,errorMsg:"注册失败"}
 
 							if(data.flag){
