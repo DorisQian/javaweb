@@ -1,8 +1,10 @@
 package service.impl;
 
+import dao.FavoriteDao;
 import dao.RouteDao;
 import dao.RouteImgDao;
 import dao.SellerDao;
+import dao.impl.FavoriteImpl;
 import dao.impl.RouteDaoImpl;
 import dao.impl.RouteImgDaoImpl;
 import dao.impl.SellerDaoImpl;
@@ -18,7 +20,7 @@ public class RouteServiceImpl implements RouteService {
     private RouteDao routeDao = new RouteDaoImpl();
     private RouteImgDao routeImgDao = new RouteImgDaoImpl();
     private SellerDao sellerDao = new SellerDaoImpl();
-
+    private FavoriteDao favoriteDao = new FavoriteImpl();
 
     @Override
     public PageBean<Route> queryPage(int cid, int currentPage, int pageSize, String rName) {
@@ -47,7 +49,8 @@ public class RouteServiceImpl implements RouteService {
         route.setRouteImgList(routeImg);
         Seller seller = sellerDao.findSeller(route.getSid());
         route.setSeller(seller);
-
+        int count = favoriteDao.findCountByRid(rid);
+        route.setCount(count);
         return route;
     }
 }

@@ -2,7 +2,10 @@ package web.servlet;
 
 import domain.PageBean;
 import domain.Route;
+import domain.User;
+import service.FavoriteService;
 import service.RouteService;
+import service.impl.FavoriteServiceImpl;
 import service.impl.RouteServiceImpl;
 
 import javax.servlet.ServletException;
@@ -14,6 +17,7 @@ import java.io.IOException;
 @WebServlet("/route/*")
 public class RouteServlet extends BaseServlet {
     private RouteService routeService = new RouteServiceImpl();
+    private FavoriteService favoriteService = new FavoriteServiceImpl();
 
     /**
      * 分页查询
@@ -66,4 +70,41 @@ public class RouteServlet extends BaseServlet {
         writeValue(route,response);
     }
 
+    /**
+     * 收藏
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void isFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String rid = request.getParameter("rid");
+        User user = (User) request.getSession().getAttribute("user");
+        int uid ;
+        if (user != null){
+            uid = user.getUid();
+        }else{
+            uid = 0;
+        }
+        Boolean flag = favoriteService.isFavorite(Integer.parseInt(rid), uid);
+        writeValue(flag, response);
+    }
+
+    /**
+     * 添加收藏
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void addFavorite(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String rid = request.getParameter("rid");
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null){
+            return;
+        } else {
+            int uid = user.getUid();
+            favoriteService.add(Integer.parseInt(rid), uid);
+        }
+    }
 }
