@@ -1,15 +1,24 @@
 package service.impl;
 
 import dao.RouteDao;
+import dao.RouteImgDao;
+import dao.SellerDao;
 import dao.impl.RouteDaoImpl;
+import dao.impl.RouteImgDaoImpl;
+import dao.impl.SellerDaoImpl;
 import domain.PageBean;
 import domain.Route;
+import domain.RouteImg;
+import domain.Seller;
 import service.RouteService;
 
 import java.util.List;
 
 public class RouteServiceImpl implements RouteService {
-    RouteDao routeDao = new RouteDaoImpl();
+    private RouteDao routeDao = new RouteDaoImpl();
+    private RouteImgDao routeImgDao = new RouteImgDaoImpl();
+    private SellerDao sellerDao = new SellerDaoImpl();
+
 
     @Override
     public PageBean<Route> queryPage(int cid, int currentPage, int pageSize, String rName) {
@@ -31,8 +40,14 @@ public class RouteServiceImpl implements RouteService {
         return pb;
     }
 
-//    @Override
-//    public Route findOne(int cid) {
-//        return null;
-//    }
+    @Override
+    public Route findOne(int rid) {
+        Route route = routeDao.findByOne(rid);
+        List<RouteImg> routeImg = routeImgDao.findRouteImg(rid);
+        route.setRouteImgList(routeImg);
+        Seller seller = sellerDao.findSeller(route.getSid());
+        route.setSeller(seller);
+
+        return route;
+    }
 }

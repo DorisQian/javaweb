@@ -18,9 +18,9 @@ public interface RouteService {
     public PageBean<Route> queryPage(int cid, int currentPage, int pageSize, String rName);
 
     /**
-     *  根据id查询路线信息
-     * @param cid
+     *  根据id查询路线详细信息
+     * @param rid
      * @return
      */
-    //public Route findOne(int cid);
+    public Route findOne(int rid);
 }

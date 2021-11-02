@@ -43,4 +43,10 @@ public class RouteDaoImpl implements RouteDao {
         param.add(pageSize);
         return template.query(sql, new BeanPropertyRowMapper<Route>(Route.class), param.toArray());
     }
+
+    @Override
+    public Route findByOne(int rid) {
+        String sql = "select * from tab_route where rid=?";
+        return  template.queryForObject(sql, new BeanPropertyRowMapper<Route>(Route.class), rid);
+    }
 }
